@@ -25,12 +25,21 @@ import {
   DatePickerYearCellTrigger,
   Portal,
   DatePickerPositioner,
+  Select,
+  SelectContent,
+  SelectLabel,
+  SelectOption,
+  SelectOptionGroup,
+  SelectOptionGroupLabel,
+  SelectPositioner,
+  SelectTrigger,
 } from '@ark-ui/react'
 import { useEffect, useState } from 'react'
 
 export default function Home() {
   const [input, setInput] = useState("")
   const [date, setDate] = useState<any>(undefined)
+  const [select, setSelect] = useState<any>(undefined)
 
   useEffect(() => {
     date && console.log(date)
@@ -40,9 +49,14 @@ export default function Home() {
     input && console.log(input)
   }, [input])
 
+  useEffect(() => {
+    select && console.log(select)
+  }, [select])
+
   return (
     <main>
       <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+
       <DatePicker value={date} onChange={(e) => setDate(e.value)}>
         {(api) => (
           <>
@@ -124,6 +138,28 @@ export default function Home() {
           </>
         )}
       </DatePicker>
+
+      <Select onChange={(e) => setSelect(e?.value)}>
+        {({ selectedOption }) => (
+          <>
+            <SelectLabel>Framework</SelectLabel>
+            <SelectTrigger>{selectedOption?.label ?? 'Select option'}</SelectTrigger>
+            <Portal>
+              <SelectPositioner>
+                <SelectContent>
+                  <SelectOption value="react" label="React" />
+                  <SelectOption value="solid" label="Solid">
+                    Solid
+                  </SelectOption>
+                  <SelectOption value="vue" label="Vue">
+                    Vue
+                  </SelectOption>
+                </SelectContent>
+              </SelectPositioner>
+            </Portal>
+          </>
+        )}
+      </Select>
     </main>
   )
 }
