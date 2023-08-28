@@ -139,7 +139,7 @@ export default function Home() {
         )}
       </DatePicker>
 
-      <Select onChange={(e) => setSelect(e?.value)}>
+      <Select selectedOption={select} onChange={(e) => setSelect(e?.value)}>
         {({ selectedOption }) => (
           <>
             <SelectLabel>Framework</SelectLabel>
